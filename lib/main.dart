@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/custom_switcher.dart';
 import 'package:flutter_app/custom_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => CustomThemeNotifier(initTheme: CustomTheme.light()),
+          create: (_) => CustomThemeNotifier(initTheme: LightTheme()),
         ),
       ],
       child: const MaterialApp(
@@ -59,7 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: CustomTheme.of(context).color2,
       appBar: AppBar(
@@ -74,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
               width: 100,
               color: CustomTheme.of(context).color1,
             ),
+            const CustomSwitcher()
           ],
         ),
       ),

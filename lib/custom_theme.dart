@@ -13,18 +13,15 @@ class CustomThemeNotifier with ChangeNotifier, DiagnosticableTreeMixin {
 
   void changeTheme() {
     if (_theme is DartTheme) {
-      _theme = CustomTheme.light();
+      _theme = LightTheme();
     } else {
-      _theme = CustomTheme.dark();
+      _theme = DartTheme();
     }
     notifyListeners();
   }
 
 }
 abstract class CustomTheme {
-  factory CustomTheme.light() => const LightTheme._();
-
-  factory CustomTheme.dark() => const DartTheme._();
 
   Color get color1;
 
@@ -36,13 +33,22 @@ abstract class CustomTheme {
 
   Color get color5;
 
+  Color get defaultColor1 => Colors.black;
+
+  Color get defaultColor2 => Colors.white;
+
+  Color get defaultColor3 => const Color(0xFF0C0E11).withOpacity(0.5);
+
+  Color get defaultColor4 => Colors.white.withOpacity(0.1);
+
+  Color get defaultColor5 => Colors.red;
+
   static CustomTheme of(BuildContext context) {
     return context.watch<CustomThemeNotifier>().theme;
   }
 }
 
-class LightTheme implements CustomTheme {
-  const LightTheme._();
+class LightTheme extends CustomTheme {
 
   @override
   Color get color1 => const Color(0xFFD3D9DE);
@@ -60,8 +66,7 @@ class LightTheme implements CustomTheme {
   Color get color5 => const Color(0xFFFF0000);
 }
 
-class DartTheme implements CustomTheme {
-  const DartTheme._();
+class DartTheme extends CustomTheme {
 
   @override
   Color get color1 => const Color(0xFF15161C);
