@@ -33,21 +33,21 @@ class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
 
-    Path path_0 = Path();
-    path_0.moveTo(size.width,0);
-    path_0.lineTo(0,0);
-    path_0.lineTo(0,size.height*0.5974026);
-    path_0.lineTo(0,size.height*0.9935065);
-    path_0.lineTo(size.width*0.04448100,size.height*0.8246753);
-    path_0.lineTo(size.width*0.5700167,size.height*0.8246753);
-    path_0.lineTo(size.width*0.9100000,size.height*0.8246753);
-    path_0.lineTo(size.width,size.height*0.4870130);
-    path_0.lineTo(size.width,0);
-    path_0.close();
+    Path path = Path();
+    path.moveTo(size.width,0);
+    path.lineTo(0,0);
+    path.lineTo(0,size.height*0.5974026);
+    path.lineTo(0,size.height*0.9935065);
+    path.lineTo(size.width*0.04448100,size.height*0.8246753);
+    path.lineTo(size.width*0.5700167,size.height*0.8246753);
+    path.lineTo(size.width*0.9100000,size.height*0.8246753);
+    path.lineTo(size.width,size.height*0.4870130);
+    path.lineTo(size.width,0);
+    path.close();
 
-    Paint paint_0_fill = Paint()..style=PaintingStyle.fill;
-    paint_0_fill.color = theme.color3;
-    canvas.drawPath(path_0,paint_0_fill);
+    Paint paintFill = Paint()..style=PaintingStyle.fill;
+    paintFill.color = theme.color3;
+    canvas.drawPath(path, paintFill);
 
   }
 
