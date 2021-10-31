@@ -11,7 +11,7 @@ class CustomLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = CustomTheme.of(context);
-    return Container(
+    return SizedBox(
       width: 380,
       height: 80,
       child: CustomPaint(
@@ -19,7 +19,7 @@ class CustomLogo extends StatelessWidget {
         painter: MyPainter(theme: theme),
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 25, bottom: 30.5, top: 16),
-          child: SvgPicture.asset('lib/assets/svg/logo.svg', color: Colors.white,),
+          child: SvgPicture.asset('assets/logo.svg', color: Colors.white,),
         ),
       ),
     );
