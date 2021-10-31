@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/custom_logo.dart';
 import 'package:flutter_app/components/custom_switcher.dart';
 import 'package:flutter_app/custom_theme.dart';
 import 'package:provider/provider.dart';
@@ -65,19 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              height: 100,
-              width: 100,
-              color: CustomTheme.of(context).color1,
-            ),
-            const CustomSwitcher()
-          ],
-        ),
-      ),
+      body: CustomLogo(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.read<CustomThemeNotifier>().changeTheme();
