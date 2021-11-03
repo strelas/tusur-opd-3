@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/components/custom_logo.dart';
 import 'package:flutter_app/components/custom_switcher.dart';
 import 'package:flutter_app/custom_theme.dart';
+import 'package:flutter_app/screens/main_screen/main_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -61,19 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: CustomTheme.of(context).color2,
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: CustomLogo(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.read<CustomThemeNotifier>().changeTheme();
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
+    return MainScreen();
   }
 }
