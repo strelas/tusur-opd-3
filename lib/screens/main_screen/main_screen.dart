@@ -17,37 +17,33 @@ class _MainScreenState extends State<MainScreen> {
     final theme = CustomTheme.of(context);
     return Scaffold(
         backgroundColor: theme.defaultColor2,
-        body: Column(
-          children: [
-            SafeArea(
-              child: Column(
-                children: [
-                  Stack(children: [
-                    CustomLogo(),
-                    SvgPicture.asset(
-                      'assets/figure.svg',
-                      width: 600,
-                      height: 600,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 480, left: 320, right: 20),
-                      child: Container(
+        body: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+          return SafeArea(
+            child: Stack(children: [
+              const CustomLogo(),
+              SvgPicture.asset(
+                'assets/figure.svg',
+                width: 600,
+                height: 600,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 480, left: 320, right: 20),
+                child: Container(
+                    width: 70,
+                    height: 70,
+                    child: IconButton(
+                        iconSize: 70,
+                        onPressed: () {},
+                        icon: SvgPicture.asset(
+                          'assets/plusButton.svg',
                           width: 70,
                           height: 70,
-                          child: IconButton(
-                            iconSize: 70,
-                              onPressed: () {},
-                              icon: SvgPicture.asset(
-                                'assets/plusButton.svg',
-                                width: 70,
-                                height: 70,
-                              ))),
-                    )
-                  ]),
-                ],
-              ),
-            ),
-          ],
+                        ))),
+              )
+            ]),
+          );
+        },
+
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
