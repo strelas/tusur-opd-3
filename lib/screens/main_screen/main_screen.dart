@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/custom_logo.dart';
+import 'package:flutter_app/components/custom_scaffold.dart';
 import 'package:flutter_app/custom_theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -14,50 +15,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    final theme = CustomTheme.of(context);
-    return Scaffold(
-        backgroundColor: theme.defaultColor2,
-        body: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-          return SafeArea(
-            child: Stack(children: [
-              const CustomLogo(),
-              SvgPicture.asset(
-                'assets/figure.svg',
-                width: 600,
-                height: 600,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 480, left: 320, right: 20),
-                child: Container(
-                    width: 70,
-                    height: 70,
-                    child: IconButton(
-                        iconSize: 70,
-                        onPressed: () {},
-                        icon: SvgPicture.asset(
-                          'assets/plusButton.svg',
-                          width: 70,
-                          height: 70,
-                        ))),
-              )
-            ]),
-          );
-        },
-
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/planner.svg'),
-                label: 'Планировщик'),
-            BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/calendar.svg'),
-                label: 'Календарь'),
-            BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/settingsIcon.svg'),
-                label: 'Настройки'),
-          ],
-          backgroundColor: theme.color1,
-        ));
+     return const CustomScaffold(haveFloatingButton: true,);
   }
 }
