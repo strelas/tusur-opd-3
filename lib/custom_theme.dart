@@ -1,25 +1,25 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/services/app_storage.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 
-class CustomThemeNotifier with ChangeNotifier, DiagnosticableTreeMixin {
-  late CustomTheme _theme;
-  CustomTheme get theme => _theme;
+class CustomThemeCubit extends Cubit<CustomTheme> {
 
-  CustomThemeNotifier({required CustomTheme initTheme}) {
-    _theme = initTheme;
-  }
+  CustomThemeCubit({required CustomTheme initTheme}) : super(LightTheme());
 
   void changeTheme() {
-    if (_theme is DartTheme) {
-      _theme = LightTheme();
-    } else {
-      _theme = DartTheme();
-    }
-    notifyListeners();
-  }
+    CustomTheme newState;
 
+    if (state is DarkTheme) {
+      newState = LightTheme();
+    } else {
+      newState = DarkTheme();
+    }
+    emit(newState);
+    AppStorage.shared.saveTheme(newState);
+  }
 }
 abstract class CustomTheme {
 
@@ -44,7 +44,7 @@ abstract class CustomTheme {
   Color get defaultColor5 => Colors.red;
 
   static CustomTheme of(BuildContext context) {
-    return context.watch<CustomThemeNotifier>().theme;
+    return context.watch<CustomThemeCubit>().state;
   }
 }
 
@@ -66,7 +66,7 @@ class LightTheme extends CustomTheme {
   Color get color5 => const Color(0xFFFF0000);
 }
 
-class DartTheme extends CustomTheme {
+class DarkTheme extends CustomTheme {
 
   @override
   Color get color1 => const Color(0xFF15161C);

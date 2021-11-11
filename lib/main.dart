@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/custom_logo.dart';
-import 'package:flutter_app/components/custom_switcher.dart';
 import 'package:flutter_app/custom_theme.dart';
 import 'package:flutter_app/screens/main_screen/main_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_app/services/app_storage.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,16 +13,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => CustomThemeNotifier(initTheme: LightTheme()),
-        ),
-      ],
-      child: const MaterialApp(
-        title: 'Flutter Demo',
-        home: MyHomePage(title: 'Flutter Demo Home Page'),
-      ),
+    return FutureBuilder<CustomTheme>(
+      future: AppStorage.shared.getTheme(),
+      builder: (context, snapshot) {
+        final initTheme = snapshot.data;
+        if (initTheme == null) {
+          return Container(); // TODO: make loading screen
+        } else {
+          return BlocProvider(
+            create: (_) => CustomThemeCubit(initTheme: initTheme),
+            child: const MaterialApp(
+              title: 'Flutter Demo',
+              home: MyHomePage(title: 'Flutter Demo Home Page'),
+            ),
+          );
+        }
+      },
     );
   }
 }
