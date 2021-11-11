@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
             child: const MaterialApp(
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
-              title: "ТЕСТ",
+              title: "ОПД 3",
               home:  MainScreen(),
             ),
           );
