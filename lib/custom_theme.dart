@@ -20,8 +20,11 @@ class CustomThemeCubit extends Cubit<CustomTheme> {
     emit(newState);
     AppStorage.shared.saveTheme(newState);
   }
+
 }
 abstract class CustomTheme {
+
+  Color get fontColor;
 
   Color get color1;
 
@@ -51,6 +54,9 @@ abstract class CustomTheme {
 class LightTheme extends CustomTheme {
 
   @override
+  Color get fontColor => Colors.black;
+
+  @override
   Color get color1 => const Color(0xFFD3D9DE);
 
   @override
@@ -67,6 +73,8 @@ class LightTheme extends CustomTheme {
 }
 
 class DarkTheme extends CustomTheme {
+  @override
+  Color get fontColor => Colors.white;
 
   @override
   Color get color1 => const Color(0xFF15161C);

@@ -23,11 +23,15 @@ class MyApp extends StatelessWidget {
         } else {
           return BlocProvider(
             create: (_) => CustomThemeCubit(initTheme: initTheme),
-            child: const MaterialApp(
+            child: MaterialApp(
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               title: "ОПД 3",
-              home:  MainScreen(),
+              home:  Builder(
+                builder: (context) {
+                  return DefaultTextStyle(style: TextStyle(color: CustomTheme.of(context).fontColor),child: const MainScreen());
+                }
+              ),
             ),
           );
         }
