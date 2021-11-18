@@ -24,8 +24,8 @@ class _MainScreenState extends State<MainScreen> {
     return CustomScaffold(
       child: Column(
         children: [
-          const Expanded(
-            child: SettingsPageBody(),
+          Expanded(
+            child: mainPage,
           ),
           CustomNavBar(
             items: [

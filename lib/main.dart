@@ -27,11 +27,12 @@ class MyApp extends StatelessWidget {
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               title: "ОПД 3",
-              home:  Builder(
-                builder: (context) {
-                  return DefaultTextStyle(style: TextStyle(color: CustomTheme.of(context).fontColor),child: const MainScreen());
-                }
-              ),
+              home: Builder(builder: (context) {
+                return DefaultTextStyle(
+                  style: TextStyle(color: CustomTheme.of(context).fontColor),
+                  child: const MainScreen(),
+                );
+              }),
             ),
           );
         }
