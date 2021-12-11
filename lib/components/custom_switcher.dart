@@ -73,7 +73,7 @@ class _CustomSwitcherState extends State<CustomSwitcher> {
                 height: 28,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
-                  color: theme.defaultColor2,
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -90,16 +90,16 @@ class _CustomSwitcherState extends State<CustomSwitcher> {
       height: 30,
       color: theme.color4,
       child: Row(
-        children: [
-          const Spacer(),
+        children: const [
+          Spacer(),
           Padding(
-            padding: const EdgeInsets.only(right: 8),
+            padding: EdgeInsets.only(right: 8),
             child: Text(
               "OFF",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w400,
-                color: theme.defaultColor2,
+                color: Colors.white,
               ),
             ),
           ),
@@ -113,17 +113,17 @@ class _CustomSwitcherState extends State<CustomSwitcher> {
     return Container(
       width: 75,
       height: 30,
-      color: theme.color3,
+      color: theme.color5,
       child: Row(
-        children: [
+        children: const [
           Padding(
-            padding: const EdgeInsets.only(left: 10),
+            padding: EdgeInsets.only(left: 10),
             child: Text(
               "ON",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w400,
-                color: theme.defaultColor2,
+                color: Colors.white,
               ),
             ),
           ),

@@ -46,7 +46,7 @@ class MyPainter extends CustomPainter {
     path.close();
 
     Paint paintFill = Paint()..style=PaintingStyle.fill;
-    paintFill.color = theme.color3;
+    paintFill.color = theme.color5;
     canvas.drawPath(path, paintFill);
 
   }

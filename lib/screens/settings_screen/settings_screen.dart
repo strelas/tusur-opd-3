@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_app/components/custom_scaffold.dart';
 import 'package:flutter_app/components/custom_switcher.dart';
 import 'package:flutter_app/custom_theme.dart';
@@ -23,8 +24,15 @@ class _SettingsPageBodyState extends State<SettingsPageBody> {
           margin: const EdgeInsets.only(left: 20, right: 20, top: 105),
           height: 2,
           decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                offset: const Offset(0, 2),
+                blurRadius: 4,
+                color: Colors.black.withOpacity(0.25),
+              )
+            ],
             borderRadius: BorderRadius.circular(5),
-            color: theme.color3,
+            color: theme.color5,
           ),
         ),
         const SizedBox(
@@ -40,8 +48,7 @@ class _SettingsPageBodyState extends State<SettingsPageBody> {
                     const TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
               ),
               const Spacer(),
-              BlocBuilder<NotificationBloc,bool>(
-                  builder: (context, snapshot) {
+              BlocBuilder<NotificationBloc, bool>(builder: (context, snapshot) {
                 return CustomSwitcher(
                   initValue: snapshot,
                   onSwitch: (value) {

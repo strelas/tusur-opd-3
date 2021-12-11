@@ -36,15 +36,16 @@ abstract class CustomTheme {
 
   Color get color5;
 
-  Color get defaultColor1 => Colors.black;
+  Color get color6;
 
-  Color get defaultColor2 => Colors.white;
+  Color get color7;
 
-  Color get defaultColor3 => const Color(0xFF0C0E11).withOpacity(0.5);
+  Color get color8 => const Color(0xFFF92B2B);
 
-  Color get defaultColor4 => Colors.white.withOpacity(0.1);
+  Color get color9;
 
-  Color get defaultColor5 => Colors.red;
+  Color get color11;
+
 
   static CustomTheme of(BuildContext context) {
     return context.watch<CustomThemeCubit>().state;
@@ -57,19 +58,31 @@ class LightTheme extends CustomTheme {
   Color get fontColor => Colors.black;
 
   @override
-  Color get color1 => const Color(0xFFD3D9DE);
+  Color get color1 => Colors.white;
 
   @override
-  Color get color2 => const Color(0xFF323640);
+  Color get color2 => Colors.black.withOpacity(0.06);
 
   @override
-  Color get color3 => const Color(0xFF005BAC);
+  Color get color3 => Colors.black.withOpacity(0.1);
 
   @override
-  Color get color4 => const Color(0xFF848E9C);
+  Color get color4 => const Color(0xFFC8CDD2);
 
   @override
-  Color get color5 => const Color(0xFFFF0000);
+  Color get color5 => const Color(0xFF005BAC);
+
+  @override
+  Color get color6 => Colors.black;
+
+  @override
+  Color get color7 => Color.fromARGB((255*0.45).floor(),12, 14, 17);
+
+  @override
+  Color get color9 => Color.fromARGB((255*0.4).floor(), 12, 14, 17);
+
+  @override
+  Color get color11 => Colors.white.withOpacity(0.85);
 }
 
 class DarkTheme extends CustomTheme {
@@ -77,17 +90,29 @@ class DarkTheme extends CustomTheme {
   Color get fontColor => Colors.white;
 
   @override
-  Color get color1 => const Color(0xFF15161C);
+  Color get color1 => const Color(0xFF22282E);
 
   @override
-  Color get color2 => const Color(0xFF22282E);
+  Color get color2 => Color.fromARGB((255/2).floor(), 12, 14, 17);
 
   @override
-  Color get color3 => const Color(0xFF007DBE);
+  Color get color3 => Color.fromARGB((255*7/10).floor(), 12, 14, 17);
 
   @override
-  Color get color4 => const Color(0xFF848E9C);
+  Color get color4 => const Color(0xFF15161C);
 
   @override
-  Color get color5 => const Color(0xFFFF0000);
+  Color get color5 => const Color(0xFF007DBE);
+
+  @override
+  Color get color6 => Colors.white;
+
+  @override
+  Color get color7 => const Color(0xFF848E9C);
+
+  @override
+  Color get color9 => Color.fromARGB((255*0.5).floor(), 12, 14, 17);
+
+  @override
+  Color get color11 => Color.fromARGB((255*0.6).floor(), 132, 142, 156);
 }

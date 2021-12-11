@@ -39,7 +39,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
             child: Container(
               width: 320,
               height: 2,
-              color: CustomTheme.of(context).color3,
+              color: CustomTheme.of(context).color1,
             ),
           ),
         ],
@@ -62,7 +62,8 @@ class _CustomScaffoldState extends State<CustomScaffold> {
           builder: (context) {
             return DefaultTextStyle(
               style: TextStyle(color: theme.fontColor),
-              child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                 child: LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
                     return Stack(children: [
@@ -71,7 +72,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                         'assets/figure.svg',
                         width: constraints.maxWidth,
                         height: constraints.maxHeight,
-                        color: theme.color3,
+                        color: Colors.black,
                       ),
                       widget.child,
                     ]);
