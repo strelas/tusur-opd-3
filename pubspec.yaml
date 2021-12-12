@@ -30,6 +30,7 @@ dependencies:
   flutter_svg: ^0.23.0+1
   flutter_bloc: ^7.3.3
   flutter_secure_storage: ^4.2.1
+  collection: any
   intl: ^0.17.0
   flutter:
     sdk: flutter

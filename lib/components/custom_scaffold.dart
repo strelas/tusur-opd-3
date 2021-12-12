@@ -29,22 +29,6 @@ class _CustomScaffoldState extends State<CustomScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> _pages = <Widget>[
-      Container(),
-      Container(),
-      Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 105, left: 20),
-            child: Container(
-              width: 320,
-              height: 2,
-              color: CustomTheme.of(context).color1,
-            ),
-          ),
-        ],
-      ),
-    ];
     CustomTheme theme = CustomTheme.of(context);
     return Scaffold(
       backgroundColor: theme.color1,
@@ -58,29 +42,40 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                   height: 60,
                 ))
             : null,
-        body: Builder(
-          builder: (context) {
-            return DefaultTextStyle(
-              style: TextStyle(color: theme.fontColor),
-              child: Padding(
-                padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                child: LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                    return Stack(children: [
-                      const CustomLogo(),
-                      SvgPicture.asset(
-                        'assets/figure.svg',
-                        width: constraints.maxWidth,
-                        height: constraints.maxHeight,
-                        color: Colors.black,
-                      ),
-                      widget.child,
-                    ]);
-                  },
+        body: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: Builder(
+            builder: (context) {
+              return DefaultTextStyle(
+                style: TextStyle(color: theme.fontColor),
+                child: Padding(
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                  child: LayoutBuilder(
+                    builder: (BuildContext context, BoxConstraints constraints) {
+                      return Stack(children: [
+                        SvgPicture.asset(
+                          'assets/figure.svg',
+                          width: constraints.maxWidth,
+                          height: constraints.maxHeight,
+                          color: Colors.black,
+                        ),
+                        Positioned.fill(
+                          child: Column(
+                            children: [
+                              const CustomLogo(),
+                              Expanded(child: widget.child),
+                            ],
+                          ),
+                        ),
+                      ]);
+                    },
+                  ),
                 ),
-              ),
-            );
-          }
+              );
+            }
+          ),
         ),
     );
   }

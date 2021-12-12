@@ -4,6 +4,7 @@ import 'package:flutter_app/components/custom_logo.dart';
 import 'package:flutter_app/components/custom_nav_bar.dart';
 import 'package:flutter_app/components/custom_scaffold.dart';
 import 'package:flutter_app/custom_theme.dart';
+import 'package:flutter_app/screens/goals_screen/goals_page.dart';
 import 'package:flutter_app/screens/settings_screen/settings_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -24,9 +25,7 @@ class _MainScreenState extends State<MainScreen> {
     return CustomScaffold(
       child: Column(
         children: [
-          Expanded(
-            child: mainPage,
-          ),
+          Expanded(child: mainPage),
           CustomNavBar(
             items: [
               Column(
@@ -88,6 +87,7 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget get mainPage {
     if (index == 0) {
+      return const GoalsPage();
     } else if (index == 1) {
     } else if (index == 2) {
       return const SettingsPageBody();

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/custom_scaffold.dart';
+import 'package:flutter_app/components/custom_divider.dart';
 import 'package:flutter_app/components/custom_switcher.dart';
 import 'package:flutter_app/custom_theme.dart';
 import 'package:flutter_app/screens/settings_screen/notification_bloc.dart';
@@ -20,24 +20,8 @@ class _SettingsPageBodyState extends State<SettingsPageBody> {
     final theme = CustomTheme.of(context);
     return Column(
       children: [
-        Container(
-          margin: const EdgeInsets.only(left: 20, right: 20, top: 105),
-          height: 2,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                offset: const Offset(0, 2),
-                blurRadius: 4,
-                color: Colors.black.withOpacity(0.25),
-              )
-            ],
-            borderRadius: BorderRadius.circular(5),
-            color: theme.color5,
-          ),
-        ),
-        const SizedBox(
-          height: 23,
-        ),
+        const CustomDivider(),
+        const SizedBox(height: 23),
         Padding(
           padding: const EdgeInsets.only(right: 35, left: 25),
           child: Row(
