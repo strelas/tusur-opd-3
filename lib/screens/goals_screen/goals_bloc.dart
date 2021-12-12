@@ -59,6 +59,12 @@ class GoalsBlocSetTimer implements GoalsBlocEvent {
   const GoalsBlocSetTimer(this.timer, this.task);
 }
 
+class GoalsBlocDoneTask implements GoalsBlocEvent {
+  final Task task;
+
+  const GoalsBlocDoneTask(this.task);
+}
+
 abstract class GoalsPageState {}
 
 class GoalsPageStateList implements GoalsPageState {
@@ -75,6 +81,8 @@ class GoalsPageStateSingleGoal implements GoalsPageState {
 
 class GoalsBloc extends Bloc<GoalsBlocEvent, GoalsPageState> {
   GoalsPageStateList _stateList;
+  final _notificationService = NotificationService.shared;
+  final _appStorage = AppStorage.shared;
 
   GoalsBloc(GoalsPageStateList initialState)
       : _stateList = initialState,
@@ -153,16 +161,31 @@ class GoalsBloc extends Bloc<GoalsBlocEvent, GoalsPageState> {
         newList[indexOfGoal].tasks[indexOfChanging] = newTask;
         _stateList = GoalsPageStateList(goals: newList);
         emit(GoalsPageStateSingleGoal(newList[indexOfGoal]));
-        NotificationService.shared.setLocalNotification(
+        _notificationService.setLocalNotification(
           dateTime,
           event.task.text,
         );
       }
     });
 
+    on<GoalsBlocDoneTask>((event, emit) {
+      final state = this.state;
+      if (state is GoalsPageStateSingleGoal) {
+        final indexOfChanging = state.goal.tasks.indexOf(event.task);
+        final newList = _stateList.goals.toList();
+        final indexOfGoal = newList.indexOf(state.goal);
+        final newTask = newList[indexOfGoal].tasks[indexOfChanging].copyWith(
+          done: true
+        );
+        newList[indexOfGoal].tasks[indexOfChanging] = newTask;
+        _stateList = GoalsPageStateList(goals: newList);
+        emit(GoalsPageStateSingleGoal(newList[indexOfGoal]));
+      }
+    });
+
     stream.listen((state) {
       if (state is GoalsPageStateList) {
-        AppStorage.shared.saveGoals(state.goals);
+        _appStorage.saveGoals(state.goals);
         _stateList = state;
       }
     });

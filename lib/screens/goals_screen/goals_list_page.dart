@@ -97,26 +97,43 @@ class GoalsListPage extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () async {
-                  showDatePicker(
+                  final date = await showDatePicker(
                     context: context,
                     initialDate: DateTime.now(),
                     firstDate: DateTime.now(),
                     lastDate: DateTime.now().add(const Duration(days: 350)),
-                  ).then((value) {
-                    if (value != null) {
-                      context.read<GoalsBloc>().add(
-                        GoalsBlocNewGoal(
-                          newGoal: Goal(
-                            text: textEditingController.text,
-                            done: false,
-                            date: value,
-                            tasks: [],
-                          ),
-                        ),
-                      );
-                      textEditingController.clear();
-                    }
-                  });
+                  );
+
+                  if (date == null) {
+                    return;
+                  }
+
+                  final time = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.now(),
+                  );
+                  if (time == null) {
+                    return;
+                  }
+                  final newDate = DateTime(
+                    date.year,
+                    date.month,
+                    date.day,
+                    time.hour,
+                    time.minute,
+                  );
+
+                  context.read<GoalsBloc>().add(
+                    GoalsBlocNewGoal(
+                      newGoal: Goal(
+                        text: textEditingController.text,
+                        done: false,
+                        date: newDate,
+                        tasks: [],
+                      ),
+                    ),
+                  );
+                  textEditingController.clear();
                 },
                 child: Container(
                   width: 34,

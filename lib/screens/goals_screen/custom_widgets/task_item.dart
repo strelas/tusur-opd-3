@@ -29,50 +29,41 @@ class TaskItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(bottom: 10),
         child: GestureDetector(
-          onTap: () async {
-            if (task.started) {
-              showDialog(
+          onLongPressStart: (details) async {
+            final overlay = Overlay.of(context)?.context.findRenderObject()!;
+            final selected = await showMenu(
                 context: context,
-                builder: (context) => Dialog(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const SizedBox(height: 10,),
-                      Text("Осталось: " + task.timeOfEnd!
-                          .difference(DateTime.now())
-                          .toString().split(".").first),
-                      SizedBox(
-                        height: 40,
-                        child: Row(
-                          children: [
-                            const Spacer(),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(
-                                "OK",
-                                style: TextStyle(color: theme.color5),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
+                position: RelativeRect.fromRect(
+                  (details.globalPosition) & (const Size(40, 40)),
+                  Offset.zero & overlay!.semanticBounds.size,
+                ),
+                items: [
+                  PopupMenuItem(
+                    value: 0,
+                    child: Text(AppLocalizations.of(context)!.done),
                   ),
+                  PopupMenuItem(
+                    value: 1,
+                    child: Text(AppLocalizations.of(context)!.setTimer),
+                  ),
+                ]);
+            if (selected == null) {
+              return;
+            }
+            if (selected == 0) {
+              context.read<GoalsBloc>().add(GoalsBlocDoneTask(task));
+            } else if (selected == 1) {
+              final time = await showTimePicker(
+                context: context,
+                initialTime: const TimeOfDay(
+                  hour: 0,
+                  minute: 0,
                 ),
               );
-            } else {
-              final timer = await showTimePicker(
-                helpText: AppLocalizations.of(context)!.timer,
-                context: context,
-                initialTime: const TimeOfDay(hour: 0, minute: 0),
-              );
-              if (timer == null) {
+              if (time == null) {
                 return;
               }
-
-              context.read<GoalsBloc>().add(GoalsBlocSetTimer(timer, task));
+              context.read<GoalsBloc>().add(GoalsBlocSetTimer(time, task));
             }
           },
           child: Container(
@@ -100,11 +91,14 @@ class TaskItem extends StatelessWidget {
                     height: 15,
                     decoration: BoxDecoration(
                       color: theme.color7,
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
-                      Icons.check,
-                      color: theme.color1,
+                    child: Center(
+                      child: Icon(
+                        Icons.check,
+                        color: theme.color1,
+                        size: 12,
+                      ),
                     ),
                   ),
                 const SizedBox(width: 8),

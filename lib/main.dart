@@ -6,10 +6,12 @@ import 'package:flutter_app/screens/settings_screen/notification_bloc.dart';
 import 'package:flutter_app/services/app_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 import 'entity/goal.dart';
 
 void main() {
+  tz.initializeTimeZones();
   runApp(const MyApp());
 }
 

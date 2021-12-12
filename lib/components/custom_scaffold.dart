@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/custom_theme.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -25,13 +26,15 @@ class CustomScaffold extends StatefulWidget {
 }
 
 class _CustomScaffoldState extends State<CustomScaffold> {
-  int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     CustomTheme theme = CustomTheme.of(context);
-    return Scaffold(
-      backgroundColor: theme.color1,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: theme is DarkTheme
+          ? SystemUiOverlayStyle.light
+          : SystemUiOverlayStyle.dark,
+      child: Scaffold(
+        backgroundColor: theme.color1,
         floatingActionButton: widget.haveFloatingButton
             ? IconButton(
                 iconSize: 70,
@@ -46,43 +49,36 @@ class _CustomScaffoldState extends State<CustomScaffold> {
           onTap: () {
             FocusScope.of(context).unfocus();
           },
-          child: Builder(
-            builder: (context) {
-              return DefaultTextStyle(
-                style: TextStyle(color: theme.fontColor),
-                child: Padding(
-                  padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                  child: LayoutBuilder(
-                    builder: (BuildContext context, BoxConstraints constraints) {
-                      return Stack(children: [
-                        SvgPicture.asset(
-                          'assets/figure.svg',
-                          width: constraints.maxWidth,
-                          height: constraints.maxHeight,
-                          color: Colors.black,
+          child: Builder(builder: (context) {
+            return DefaultTextStyle(
+              style: TextStyle(color: theme.fontColor),
+              child: Padding(
+                padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                child: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    return Stack(children: [
+                      SvgPicture.asset(
+                        'assets/figure.svg',
+                        width: constraints.maxWidth,
+                        height: constraints.maxHeight,
+                        color: Colors.black,
+                      ),
+                      Positioned.fill(
+                        child: Column(
+                          children: [
+                            const CustomLogo(),
+                            Expanded(child: widget.child),
+                          ],
                         ),
-                        Positioned.fill(
-                          child: Column(
-                            children: [
-                              const CustomLogo(),
-                              Expanded(child: widget.child),
-                            ],
-                          ),
-                        ),
-                      ]);
-                    },
-                  ),
+                      ),
+                    ]);
+                  },
                 ),
-              );
-            }
-          ),
+              ),
+            );
+          }),
         ),
+      ),
     );
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 }
