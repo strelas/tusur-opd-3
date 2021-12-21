@@ -4,6 +4,8 @@ import 'package:flutter_app/components/custom_logo.dart';
 import 'package:flutter_app/components/custom_nav_bar.dart';
 import 'package:flutter_app/components/custom_scaffold.dart';
 import 'package:flutter_app/custom_theme.dart';
+import 'package:flutter_app/screens/calendar_screen/calendar_provider.dart';
+import 'package:flutter_app/screens/calendar_screen/calendar_screen.dart';
 import 'package:flutter_app/screens/goals_screen/goals_page.dart';
 import 'package:flutter_app/screens/settings_screen/settings_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -89,6 +91,7 @@ class _MainScreenState extends State<MainScreen> {
     if (index == 0) {
       return const GoalsPage();
     } else if (index == 1) {
+      return CalendarProvider();
     } else if (index == 2) {
       return const SettingsPageBody();
     }
